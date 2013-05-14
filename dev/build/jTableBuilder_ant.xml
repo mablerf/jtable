@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="jTable" default="concat-all">
+	<target name="concat-all">
+	    <concat destfile="${basedir}/dev/jquery.jtable.js" encoding="UTF-8" outputencoding="UTF-8" fixlastline="true">
+	    	<filelist id="filelist" dir="${basedir}/dev">
+				<file name="jquery.jtable.core.js" />
+				<file name="jquery.jtable.utils.js" />
+				<file name="jquery.jtable.forms.js" />
+				<file name="jquery.jtable.creation.js" />
+				<file name="jquery.jtable.editing.js" />
+				<file name="jquery.jtable.deletion.js" />
+				<file name="jquery.jtable.selecting.js" />
+				<file name="jquery.jtable.paging.js" />
+				<file name="jquery.jtable.sorting.js" />
+				<file name="jquery.jtable.dynamiccolumns.js" />
+				<file name="jquery.jtable.masterchild.js" />
+		    </filelist>
+	    </concat>
+	</target>
+	
+	<target name="minify" depends="concat-all">
+	    <apply executable="java" parallel="false">
+	        <fileset dir="${basedir}/dev" includes="jquery.jtable.js"/>
+	        <arg line="-jar"/>
+	        <arg path="${basedir}/yuicompressor.jar"/>
+	        <srcfile/>
+	        <arg line="-o"/>
+	        <mapper type="glob" from="*.js" to="*.min.js"/>
+	        <targetfile/>
+	    </apply>
+	</target>
+</project>

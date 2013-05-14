@@ -71,6 +71,8 @@
             //Create input according to field type
             if (field.type == 'date') {
                 return this._createDateInputForField(field, fieldName, value);
+            } else if (field.type == 'displayonly') {
+            	return this._createDisplayOnlyForField(field, fieldName, value);
             } else if (field.type == 'textarea') {
                 return this._createTextAreaForField(field, fieldName, value);
             } else if (field.type == 'password') {
@@ -112,7 +114,20 @@
                 .addClass('jtable-input jtable-date-input')
                 .append($input);
         },
-
+        
+        /* Creates a div element for a field, to allow display in the edit form, but not actually editable
+         ************************************************************************/
+        _createDisplayOnlyForField: function (field, fieldName, value) {
+        	var $d = $('<div class="' + field.inputClass + ' id="Edit-' + fieldName + '" name="' + fieldName + '"></div>');
+        	if (value != undefined) {
+        		$d.text(value);
+        	}
+        	
+        	return $('<div />')
+        		.addClass('jtable-input jtable-textarea-input')
+        		.append($d);
+        },
+        
         /* Creates a textarea element for a field.
         *************************************************************************/
         _createTextAreaForField: function (field, fieldName, value) {
